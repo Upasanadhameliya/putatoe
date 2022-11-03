@@ -3,6 +3,8 @@ from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from django.db import models
+
 
 class User(AbstractUser):
     """
@@ -24,3 +26,6 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+class Data(models.Model):
+    var = CharField(_("Editable Variable"), blank=True, max_length=255)
