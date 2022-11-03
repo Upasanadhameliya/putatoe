@@ -28,4 +28,4 @@ class User(AbstractUser):
         return reverse("users:detail", kwargs={"username": self.username})
 
 class Data(models.Model):
-    var1 = CharField(_("Editable Variable 1"), blank=True, max_length=255)
+    var = CharField(_("Editable Variable"), blank=True, max_length=255)

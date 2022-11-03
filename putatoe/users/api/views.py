@@ -3,9 +3,10 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, DataSerializer
+from putatoe.users.models import Data
 
 User = get_user_model()
 
@@ -23,3 +24,7 @@ class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericV
     def me(self, request):
         serializer = UserSerializer(request.user, context={"request": request})
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+
+class DataViewSet(ModelViewSet):
+    serializer_class = DataSerializer
+    queryset = Data.objects.all()
